@@ -1,0 +1,31 @@
+input {
+s3 {
+"region" => "region_name"
+"bucket" => "bucket_name"
+"prefix" => "prefix for bucket"
+"additional_settings" => {
+          "force_path_style" => true
+          "follow_redirects" => false
+        }
+codec => "json"
+sincedb_path => "sincedb_path_for_S3"
+}
+}
+
+
+filter {
+
+}
+
+
+output {
+		elasticsearch {
+		hosts => ["host_name:port_number"]
+		ssl_certificate_verification => "true"
+		user => "elastic"
+		password => "xxxxxxxxxxxxxxxxxxxxxxxxx"
+        	document_id => "%{document_id_field}"
+		manage_template => "false"
+		index => "Index_name"
+		}
+}

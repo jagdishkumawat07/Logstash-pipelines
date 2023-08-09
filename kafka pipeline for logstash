@@ -1,0 +1,30 @@
+input {
+kafka {
+bootstrap_servers => "server-name:port"
+    topics => "Topic_Name"
+    group_id => "Group_id_name"
+    consumer_threads => 1
+    security_protocol => "SSL"
+    ssl_keystore_location => "/etc/logstash/certs/file_name.jks"
+    ssl_keystore_password => "xxxxxxxxxx"
+    ssl_truststore_location => "/etc/logstash/certs/file_name.jks"
+    max_poll_records => "1"
+    decorate_events => true
+    auto_offset_reset =>"latest"
+    codec => json
+         }
+}
+filter {
+
+}
+output {
+		elasticsearch {
+		hosts => ["host_name:port_number"]
+		ssl_certificate_verification => "true"
+		user => "elastic"
+		password => "xxxxxxxxxxxxxxxxxxxxxxxxx"
+        	document_id => "%{document_id_field}"
+		manage_template => "false"
+		index => "Index_name"
+		}
+}

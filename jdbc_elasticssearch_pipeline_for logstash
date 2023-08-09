@@ -1,0 +1,31 @@
+input {
+	
+    jdbc {
+        jdbc_connection_string => "host_name"
+        jdbc_user => "user_name"
+        jdbc_password => "xxxxxxxxxxxxxx"
+        jdbc_driver_library => "/etc/logstash/jars/file_name.jar"
+        jdbc_driver_class => "driver_class_for_JDBC"
+		schedule => "1 * * * *"
+        statement_filepath => "/etc/logstash/sql_files/ams_trans/compliance-iwra-batches-prod.sql or you can add statement"
+		type => ""
+	}
+}
+
+
+filter {
+
+	
+}
+
+output {
+		elasticsearch {
+		hosts => ["host_name:port_number"]
+		ssl_certificate_verification => "true"
+		user => "elastic"
+		password => "xxxxxxxxxxxxxxxxxxxxxxxxx"
+        	document_id => "%{document_id_field}"
+		manage_template => "false"
+		index => "Index_name"
+		}
+}
